@@ -1,0 +1,27 @@
+{
+  "name": "social-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "cd server && NODE_ENV=production npm run start",
+    "dev": "cd server && NODE_ENV=development npm run dev",
+    "lint-fix": "cd server && npm run lint-fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinaYahya/social-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint-fix"
+  ],
+  "bugs": {
+    "url": "https://github.com/LinaYahya/social-app/issues"
+  },
+  "homepage": "https://github.com/LinaYahya/social-app#readme"
+}
