@@ -16,4 +16,12 @@ app.use(middleWares);
 
 app.use('/api/v1/', router);
 
+app.use((req, res) => {
+  res.status(404).send({ msg: 'page not found' });
+});
+
+app.use((err, req, res, next) => {
+  res.status(500).send({ msg: 'internal server error' });
+});
+
 module.exports = app;
