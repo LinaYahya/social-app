@@ -15,7 +15,19 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    required: true,
+    default: 'lm3xruk5amec1b9ax0j2.png',
+  },
+  friends: {
+    type: [{
+      status: {
+        type: String,
+        default: 'pending',
+      },
+      userID: {
+        type: String,
+        required: true,
+      },
+    }],
   },
 });
 
