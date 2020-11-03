@@ -24,7 +24,7 @@ const userSchema = new Schema({
         default: 'pending',
       },
       userID: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true,
       },
     }],
