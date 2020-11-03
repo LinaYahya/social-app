@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const users = require('./fakeData/users');
 
 const { MONGO_URI, DEV_DB_URL, NODE_ENV } = process.env;
 
@@ -18,6 +19,7 @@ switch (NODE_ENV) {
 mongoose
   .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('DB connected'))
+  .then(() => users())
   .catch((err) => console.log(err));
 
 module.exports = mongoose.connection;
