@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cd server && NODE_ENV=production npm run start",
     "dev": "cd server && NODE_ENV=development npm run dev",
-    "lint-fix": "cd server && npm run lint-fix"
+    "lint-fix": "cd server && npm run lint-fix",
+    "kill-run": "fuser -k 5000/tcp && npm run dev"
   },
   "repository": {
     "type": "git",
