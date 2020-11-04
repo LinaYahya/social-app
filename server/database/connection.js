@@ -1,10 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-const { insertUsers, insertMsgs } = require('./fakeData');
 
 const { MONGO_URI, DEV_DB_URL, NODE_ENV } = process.env;
 
 let dbUrl;
-
 switch (NODE_ENV) {
   case ('production'):
     dbUrl = MONGO_URI;
@@ -15,12 +14,9 @@ switch (NODE_ENV) {
   default:
     throw new Error('No Database URL!!!');
 }
-
 mongoose
   .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('DB connected'))
-  .then(() => insertUsers())
-  .then(() => insertMsgs())
   .catch((err) => console.log(err));
 
 module.exports = mongoose.connection;
