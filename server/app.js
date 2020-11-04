@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 const compression = require('compression');
 // eslint-disable-next-line import/no-extraneous-dependencies
