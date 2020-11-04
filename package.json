@@ -6,7 +6,7 @@
     "start": "cd server && NODE_ENV=production npm run start",
     "dev": "cd server && NODE_ENV=development npm run dev",
     "lint-fix": "cd server && npm run lint-fix",
-    "dev-run": "fuser -k 5000/tcp && npm run dev"
+    "kill-run": "fuser -k 5000/tcp && npm run dev"
   },
   "repository": {
     "type": "git",
