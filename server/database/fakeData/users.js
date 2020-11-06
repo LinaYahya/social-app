@@ -5,12 +5,12 @@ module.exports = async () => {
     {
       email: 'omar@gmail.com',
       name: 'Omar',
-      password: '$2y$12$LEE968m7hvH.7lG8fR5BC.2p2Ak3YirUebRA.fGE06ZnAxgtn2USK',
+      password: '$2b$10$IDbFr20pt/ZaCZdoSxzD.OT4o4gxmmkPpK.qfqqlbvR/5T9G4bWAC',
     },
     {
       email: 'lina@gmail.com',
       name: 'lina',
-      password: '$2y$12$LEE968m7hvH.7lG8fR5BC.2p2Ak3YirUebRA.fGE06ZnAxgtn2USK',
+      password: '$2b$10$IDbFr20pt/ZaCZdoSxzD.OT4o4gxmmkPpK.qfqqlbvR/5T9G4bWAC',
     },
   ];
 
