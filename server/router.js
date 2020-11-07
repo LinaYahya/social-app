@@ -1,8 +1,6 @@
 const router = require('express').Router();
+const { signup } = require('./controllers');
 
-router.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1><p>Cool</p>');
-  res.end();
-});
+router.post('/signup', signup);
 
 module.exports = router;

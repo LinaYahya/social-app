@@ -17,6 +17,10 @@ const userSchema = new Schema({
     type: String,
     default: 'lm3xruk5amec1b9ax0j2.png',
   },
+  active: {
+    type: Boolean,
+    default: false,
+  },
   friends: {
     type: [{
       status: {
