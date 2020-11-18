@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
     const { ok } = await activateAccount(id);
     if (ok) {
       // send cookie by response
-      const token = await sign(id);
+      const token = await sign({ id });
       res.cookie('token', token);
       res.json({ message: 'your account activated' });
     } else {
