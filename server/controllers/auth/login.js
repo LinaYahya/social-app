@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
     // check request body
     await loginSchema.validateAsync({
       email, password,
-    });
+    }, { abortEarly: false });
     // check if user exist
     const user = await checkUserByEmail(email);
     if (user.length) {

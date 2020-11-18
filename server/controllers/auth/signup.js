@@ -41,6 +41,10 @@ module.exports = async (req, res, next) => {
           'signed up successfully, email sent you have to activate your account',
       });
   } catch (err) {
-    next(err);
+    if (err.message) {
+      next(Boom.badRequest(err.message));
+    } else {
+      next(err);
+    }
   }
 };
