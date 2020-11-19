@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const compression = require('compression');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const morgan = require('morgan');
@@ -16,6 +17,7 @@ const middleWares = [
   compression(),
   express.urlencoded({ extended: false }),
   express.json(),
+  cookieParser(),
 ];
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
