@@ -22,7 +22,7 @@ const userSchema = new Schema({
     default: false,
   },
   friends: {
-    type: [{
+    type: [new Schema({
       status: {
         type: String,
         default: 'pending',
@@ -31,7 +31,7 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
       },
-    }],
+    }, { _id: false })],
   },
 });
 
