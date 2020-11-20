@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
   signup, activateUser, login, addFriend,
 } = require('./controllers');
+
 const verifyUser = require('./controllers/middleWare/verifyUser');
 
 router.post('/signup', signup);
