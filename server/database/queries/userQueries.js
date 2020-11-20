@@ -10,4 +10,4 @@ exports.findFriends = (_id) => Users.findOne({ _id }, 'friends');
 
 exports.addFriend = (_id, userID) => Users.updateOne({ _id }, { $push: { friends: { userID } } });
 
-exports.deleteFriend = (_id, friends) => Users.updateOne({ _id }, { friends });
+exports.updateFriends = (_id, friends) => Users.updateOne({ _id }, { friends });

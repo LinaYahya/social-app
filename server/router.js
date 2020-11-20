@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  signup, activateUser, login, addFriend,
+  signup, activateUser, login, addFriend, respondFriendRequest,
 } = require('./controllers');
 
 const verifyUser = require('./controllers/middleWare/verifyUser');
@@ -15,5 +15,7 @@ router.post('/login', login);
 router.use(verifyUser);
 
 router.post('/addFriend', addFriend);
+
+router.post('/respondRequest', respondFriendRequest);
 
 module.exports = router;
