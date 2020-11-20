@@ -1,10 +1,12 @@
 const Boom = require('@hapi/boom');
 const { findFriends, addFriend } = require('../database/queries/userQueries');
+const { addFriendSchema } = require('./validation');
 
 module.exports = async (req, res, next) => {
   try {
     const { id } = req.user;
     const { friendID } = req.body;
+    await addFriendSchema.validateAsync({ friendID });
     // check if friend exist
     const { friends } = await findFriends(id);
     const isFriendExist = friends.some(({ userID }) => String(userID) === friendID);
@@ -17,6 +19,10 @@ module.exports = async (req, res, next) => {
       res.status(201).json({ msg: 'friend request sent successfully' });
     }
   } catch (err) {
-    next(err);
+    if (err.message) {
+      next(Boom.badRequest(err.message));
+    } else {
+      next(err);
+    }
   }
 };
