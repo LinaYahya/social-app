@@ -1,6 +1,6 @@
 const Boom = require('@hapi/boom');
-const { acceptFriendSchema } = require('./validation');
-const { findFriends, updateFriends } = require('../database/queries/userQueries');
+const { acceptFriendSchema } = require('../validation');
+const { findFriends, updateFriends } = require('../../database/queries/userQueries');
 
 module.exports = async (req, res, next) => {
   try {
