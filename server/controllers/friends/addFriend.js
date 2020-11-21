@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
     } else {
       // add friend to user database
       await addFriend(id, friendID);
+      await addFriend(friendID, id);
       res.status(201).json({ msg: 'friend request sent successfully' });
     }
   } catch (err) {
