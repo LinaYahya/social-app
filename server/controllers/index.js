@@ -1,6 +1,5 @@
 const { signup, activateUser, login } = require('./auth');
-const addFriend = require('./addFriend');
-const respondFriendRequest = require('./respondFriendRequest');
+const { addFriend, respondFriendRequest, getFriends } = require('./friends');
 
 module.exports = {
   signup,
@@ -8,4 +7,5 @@ module.exports = {
   login,
   addFriend,
   respondFriendRequest,
+  getFriends,
 };
