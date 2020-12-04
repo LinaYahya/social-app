@@ -6,52 +6,57 @@ const chats = [
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   }, {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
   {
     name: 'hi',
     avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_70,r_500,w_70/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
+  },
+  {
+    name: 'hi',
+    avatar:
+      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
   },
 ];
 
 function Rooms() {
   return (
-    <div className="roomlist">
+    <div className="conversations">
       {chats?.map((chat, index) => (
         <div className="room" key={index}>
           <img src={chat.avatar} alt="" />

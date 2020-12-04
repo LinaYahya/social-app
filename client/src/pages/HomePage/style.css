@@ -1,7 +1,15 @@
 .roomlist {
-  width: 35%;
-  border: 0.2px solid #d8d6d5;
+  width: 30%;
   height: 100vh;
   background-color: whitesmoke;
-  overflow-y: auto;
+}
+
+.roomHeader {
+  height: 15%;
+  border-bottom: 1px solid #d8d6d5;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(221, 221, 221);
 }
