@@ -1,0 +1,7 @@
+.roomlist {
+  width: 35%;
+  border: 0.2px solid #d8d6d5;
+  height: 100vh;
+  background-color: whitesmoke;
+  overflow-y: auto;
+}

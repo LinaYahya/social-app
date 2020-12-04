@@ -1,0 +1,10 @@
+.room {
+  border-bottom: 1px solid #d8d6d5;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.room span {
+  margin-left: 15px;
+}
