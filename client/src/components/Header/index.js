@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
-export default function PersonalHeader() {
+export default function PersonalHeader({ setShowFriends }) {
   const [show, setShow] = useState(false);
+
   return (
     <div className="roomHeader">
       <img
@@ -18,17 +20,18 @@ export default function PersonalHeader() {
 
         {show && (
           <div className="settingMenu" onMouseLeave={() => setShow(false)}>
-            <ul>
-              <li>New group</li>
-              <li>New Broadcast</li>
-              <li>WhatsApp Webb</li>
-              <li>Starred messages</li>
-              <li>Settings</li>
-            </ul>
+            <button type="button">New group</button>
+            <button type="button" onClick={() => setShowFriends(true)}>Friends</button>
+            <button type="button">Settings</button>
           </div>
         )}
       </div>
+
     </div>
 
   );
 }
+
+PersonalHeader.propTypes = {
+  setShowFriends: PropTypes.func.isRequired,
+};

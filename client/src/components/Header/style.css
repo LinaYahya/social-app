@@ -10,15 +10,22 @@
   border-radius: 2px;
   z-index: 15;
   position: absolute;
-  left: 12%;
-  top: 50px;
-}
-.settingMenu ul {
-  list-style-type: none;
+  left: 22%;
+  top: 55px;
 }
 
-.settingMenu ul li {
+.settingMenu button {
   display: block;
   padding: 20px;
   color: #747474;
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: medium;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.settingMenu button:hover {
+  background-color: #f3ecec;
 }
