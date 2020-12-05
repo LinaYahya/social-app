@@ -4,12 +4,17 @@
   background-color: whitesmoke;
 }
 
-.roomHeader {
-  height: 15%;
+.roomHeader,
+.friendsBar__nav {
+  height: 12%;
   border-bottom: 1px solid #d8d6d5;
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(221, 221, 221);
+}
+.friendsBar__nav {
+  background-color: #00bfa5;
+  color: white;
 }
