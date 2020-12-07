@@ -1,5 +1,5 @@
 const Boom = require('@hapi/boom');
-const { findFriends, getUser } = require('../../database/queries/userQueries');
+const { findFriends, getUser, getUsers } = require('../../database/queries/userQueries');
 
 const getFriendsData = async (arr, state) => {
   const friendsList = arr.filter(({ status: friendStatus }) => friendStatus === state);
@@ -10,7 +10,7 @@ const getFriendsData = async (arr, state) => {
   return list;
 };
 
-module.exports = async (req, res, next) => {
+exports.getFriends = async (req, res, next) => {
   try {
     const { status } = req.params;
     const { id } = req.user;
@@ -30,6 +30,24 @@ module.exports = async (req, res, next) => {
       default: {
         throw Boom.badRequest('route not exist');
       }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getUsers = async (req, res, next) => {
+  try {
+    const { start } = req.params;
+    if ((Number(start)) || start === '0') {
+      const users = await getUsers(start);
+      if (users.length) {
+        res.json({ users });
+      } else {
+        res.status(404).json({ msg: 'no users found' });
+      }
+    } else {
+      throw Boom.badRequest('start should be a number');
     }
   } catch (err) {
     next(err);
