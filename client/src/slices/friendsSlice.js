@@ -7,10 +7,17 @@ export const getFriendsRequest = createAsyncThunk('friends/getRequests', async (
   return list;
 });
 
+export const getSuggestedFriends = createAsyncThunk('friends/getSuggested', async (row) => {
+  const data = await fetch(`/api/v1/users/${row}`);
+  const { users } = await data.json();
+  return users;
+});
+
 const initialState = {
   status: 'idle',
   error: null,
   friendsRequest: [],
+  suggestedFriends: [],
 };
 
 const friendsSlice = createSlice({
@@ -25,6 +32,16 @@ const friendsSlice = createSlice({
       state.friendsRequest = state.friendsRequest.concat(action.payload);
     },
     [getFriendsRequest.rejected]: (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    },
+    [getSuggestedFriends.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [getSuggestedFriends.fulfilled]: (state, action) => {
+      state.suggestedFriends = state.suggestedFriends.concat(action.payload);
+    },
+    [getSuggestedFriends.rejected]: (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
     },
