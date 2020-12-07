@@ -29,7 +29,7 @@ const friendsSlice = createSlice({
       state.status = 'loading';
     },
     [getFriendsRequest.fulfilled]: (state, action) => {
-      state.friendsRequest = state.friendsRequest.concat(action.payload);
+      state.friendsRequest = action.payload;
     },
     [getFriendsRequest.rejected]: (state, action) => {
       state.status = 'failed';
@@ -39,7 +39,7 @@ const friendsSlice = createSlice({
       state.status = 'loading';
     },
     [getSuggestedFriends.fulfilled]: (state, action) => {
-      state.suggestedFriends = state.suggestedFriends.concat(action.payload);
+      state.suggestedFriends = action.payload;
     },
     [getSuggestedFriends.rejected]: (state, action) => {
       state.status = 'failed';

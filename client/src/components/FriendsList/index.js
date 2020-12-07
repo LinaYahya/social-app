@@ -1,26 +1,41 @@
-import React, { useEffect } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
-import { getFriendsRequest } from '../../slices/friendsSlice';
+import { getFriendsRequest, getSuggestedFriends } from '../../slices/friendsSlice';
+import './style.css';
 
 const Friend = ({
-  data: { name, avatar }, text, handler,
+  data: { name, avatar }, children,
 }) => (
-  <div className="room" key={name}>
-    <img src={avatar} alt="" />
-    <span>{name}</span>
-    <button type="button" onClick={handler}>{text}</button>
+  <div className="user">
+    <div>
+      <img
+        src="https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg"
+        alt=""
+      />
+      <span>{name}</span>
+    </div>
+    {children}
   </div>
 );
 export default function FriendsList({ setShowFriends }) {
+  const [row, setRow] = useState(0);
+
   const { friendsRequest } = useSelector((state) => state.friends);
+  const { suggestedFriends } = useSelector((state) => state.friends);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFriendsRequest());
   }, []);
+
+  useEffect(() => {
+    dispatch(getSuggestedFriends(row));
+  }, [row]);
 
   return (
     <div className="roomlist friendsBar">
@@ -30,19 +45,38 @@ export default function FriendsList({ setShowFriends }) {
         </button>
         <h2>Friends setting</h2>
       </div>
-      <div>
-        <div>
-          {friendsRequest?.map((request) => (
-            <Friend data={request} />
-          ))}
-        </div>
-        <div />
-
+      <div className="userList">
+        {friendsRequest?.length ? (
+          <div>
+            <h3> Friends request</h3>
+            {friendsRequest?.map((user) => (
+              <Friend key={user._id} data={user} />
+            ))}
+          </div>
+        ) : null}
+        {suggestedFriends?.length ? (
+          <div>
+            <h3>Suggested Friends</h3>
+            {suggestedFriends?.map((user) => (
+              <Friend key={user._id} data={user}>
+                <button type="button">Add friend</button>
+              </Friend>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
 
+Friend.propTypes = {
+  data: PropTypes.objectOf({
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }).isRequired,
+  children: PropTypes.node.isRequired,
+
+};
 FriendsList.propTypes = {
   setShowFriends: PropTypes.func.isRequired,
 };
