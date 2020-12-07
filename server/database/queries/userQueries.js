@@ -13,3 +13,7 @@ exports.findFriends = (_id) => Users.findOne({ _id }, 'friends');
 exports.addFriend = (_id, userID) => Users.updateOne({ _id }, { $push: { friends: { userID } } });
 
 exports.updateFriends = (_id, friends) => Users.updateOne({ _id }, { friends });
+
+exports.getUsers = (start) => Users.find({ active: true }, {
+  name: 1, email: 1, avatar: 1, friends: 1,
+}).skip(10 * start).limit(10);
