@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cd server && NODE_ENV=production npm run start",
     "dev": "cd server && NODE_ENV=development npm run dev",
+    "client": "cd client && npm run start",
     "lint-fix": "cd server && npm run lint-fix",
     "kill-run": "fuser -k 5000/tcp && npm run dev",
     "build-database": "NODE_ENV=development node server/database/buildFakeData.js"

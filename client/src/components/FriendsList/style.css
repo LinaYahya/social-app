@@ -1,0 +1,34 @@
+.userList{
+  margin: 20px;
+}
+.userList>div{
+  overflow-y: scroll;
+  max-height: 70vh;
+
+}
+.user, .user div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.user div img{
+  padding: 5px;
+}
+
+.user button{
+  height: 35px;
+  width: 120px;
+  background-color: #00bfa5;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bolder;
+  border: none;
+}
+
+.user button:hover{
+  background-color: white;
+  color:  #00bfa5;
+}

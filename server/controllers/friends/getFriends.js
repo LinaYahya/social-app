@@ -1,12 +1,20 @@
 const Boom = require('@hapi/boom');
-const { findFriends, getUser, getUsers } = require('../../database/queries/userQueries');
+const {
+  findFriends,
+  getUser,
+  getUsers,
+} = require('../../database/queries/userQueries');
 
 const getFriendsData = async (arr, state) => {
-  const friendsList = arr.filter(({ status: friendStatus }) => friendStatus === state);
-  const list = await Promise.all(friendsList.map(async ({ userID }) => {
-    const user = await getUser(userID);
-    return user;
-  }));
+  const friendsList = arr.filter(
+    ({ status: friendStatus }) => friendStatus === state,
+  );
+  const list = await Promise.all(
+    friendsList.map(async ({ userID }) => {
+      const user = await getUser(userID);
+      return user;
+    }),
+  );
   return list;
 };
 
@@ -39,9 +47,17 @@ exports.getFriends = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   try {
     const { start } = req.params;
-    if ((Number(start)) || start === '0') {
-      const users = await getUsers(start);
+    const { id } = req.user;
+
+    if (Number(start) || start === '0') {
+      let users = await getUsers(start);
+      const { friends } = await getUser(id);
       if (users.length) {
+        users = users.filter(
+          ({ _id }) => (
+            !friends.find(({ userID }) => String(userID) === String(_id))
+          ) && !(String(id) === String(_id)),
+        );
         res.json({ users });
       } else {
         res.status(404).json({ msg: 'no users found' });

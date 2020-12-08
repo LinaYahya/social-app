@@ -22,5 +22,4 @@ router.get('/friends/:status', getFriends);
 
 router.get('/users/:start', getUsers);
 
-
 module.exports = router;

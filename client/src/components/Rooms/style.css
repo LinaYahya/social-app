@@ -1,0 +1,14 @@
+.room {
+  border-bottom: 1px solid #d8d6d5;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.room span {
+  margin-left: 15px;
+}
+.conversations {
+  overflow-y: scroll;
+  height: 85%;
+}
