@@ -4,12 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
-import { getFriendsRequest, getSuggestedFriends } from '../../slices/friendsSlice';
+import {
+  getFriendsRequest,
+  getSuggestedFriends,
+  addFriend,
+  respondFriendRequest,
+} from '../../slices/friendsSlice';
 import './style.css';
 
-const Friend = ({
-  data: { name, avatar }, children,
-}) => (
+const Friend = ({ data: { name, avatar }, children }) => (
   <div className="user">
     <div>
       <img
@@ -40,7 +43,11 @@ export default function FriendsList({ setShowFriends }) {
   return (
     <div className="roomlist friendsBar">
       <div className="friendsBar__nav">
-        <button type="button" className="settingBtn" onClick={() => setShowFriends(false)}>
+        <button
+          type="button"
+          className="settingBtn"
+          onClick={() => setShowFriends(false)}
+        >
           <FontAwesomeIcon icon={faLongArrowAltLeft} color="white" />
         </button>
         <h2>Friends setting</h2>
@@ -50,7 +57,30 @@ export default function FriendsList({ setShowFriends }) {
           <div>
             <h3> Friends request</h3>
             {friendsRequest?.map((user) => (
-              <Friend key={user._id} data={user} />
+              <Friend key={user._id} data={user}>
+                <button
+                  type="button"
+                  onClick={() => dispatch(
+                    respondFriendRequest({
+                      friendID: user._id,
+                      respond: true,
+                    }),
+                  )}
+                >
+                  Accept Friend
+                </button>
+                <button
+                  type="button"
+                  onClick={() => dispatch(
+                    respondFriendRequest({
+                      friendID: user._id,
+                      respond: false,
+                    }),
+                  )}
+                >
+                  Cancel Request
+                </button>
+              </Friend>
             ))}
           </div>
         ) : null}
@@ -59,7 +89,12 @@ export default function FriendsList({ setShowFriends }) {
             <h3>Suggested Friends</h3>
             {suggestedFriends?.map((user) => (
               <Friend key={user._id} data={user}>
-                <button type="button">Add friend</button>
+                <button
+                  type="button"
+                  onClick={() => dispatch(addFriend(user._id))}
+                >
+                  Add friend
+                </button>
               </Friend>
             ))}
           </div>
@@ -75,7 +110,6 @@ Friend.propTypes = {
     avatar: PropTypes.string.isRequired,
   }).isRequired,
   children: PropTypes.node.isRequired,
-
 };
 FriendsList.propTypes = {
   setShowFriends: PropTypes.func.isRequired,

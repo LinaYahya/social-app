@@ -35,6 +35,16 @@ export const addFriend = createAsyncThunk(
   },
 );
 
+export const respondFriendRequest = createAsyncThunk('friends/respondRequest', async (data) => {
+  const { friendID, respond } = data;
+  await fetch('/api/v1/respondRequest', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ friendID, respond }),
+  });
+  return friendID;
+});
+
 const initialState = {
   status: 'idle',
   error: null,
@@ -75,6 +85,16 @@ const friendsSlice = createSlice({
       state.friendsRequest = state.friendsRequest.concat(action.payload);
     },
     [addFriend.rejected]: (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    },
+    [respondFriendRequest.fulfilled]: (state, action) => {
+      state.friendsRequest = state.friendsRequest.filter(
+        // eslint-disable-next-line no-underscore-dangle
+        ({ _id }) => _id !== action.payload,
+      );
+    },
+    [respondFriendRequest.rejected]: (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
     },
