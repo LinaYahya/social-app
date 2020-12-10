@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const Users = require('../modals/Users');
 const Rooms = require('../modals/Rooms');
 
@@ -6,6 +7,7 @@ module.exports = async () => {
 
   await Rooms.deleteMany({});
   await Rooms.create({
-    users: [user1, user2],
+    name: 'gossip',
+    users: [user1._id, user2._id],
   });
 };
