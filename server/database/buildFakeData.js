@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const connection = require('./connection');
-const { insertUsers, insertMsgs } = require('./fakeData');
+const { insertUsers, insertMsgs, insertRoom } = require('./fakeData');
 
 connection
   .then(() => insertUsers())
+  .then(() => insertRoom())
   .then(() => insertMsgs())
   .then(() => {
     console.log('built successfully');
