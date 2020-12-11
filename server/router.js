@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  signup, activateUser, login, addFriend, respondFriendRequest, getFriends, getUsers,
+  signup, activateUser, login, addFriend, respondFriendRequest, getFriends, getUsers, getUserRooms,
 } = require('./controllers');
 
 const verifyUser = require('./controllers/middleWare/verifyUser');
@@ -14,12 +14,14 @@ router.post('/login', login);
 // end points for protected routes
 router.use(verifyUser);
 
-router.post('/addFriend', addFriend);
+router.post('/friend', addFriend);
 
 router.post('/respondRequest', respondFriendRequest);
 
 router.get('/friends/:status', getFriends);
 
 router.get('/users/:start', getUsers);
+
+router.get('/rooms', getUserRooms);
 
 module.exports = router;
