@@ -3,7 +3,6 @@ const { Schema, model, models } = require('mongoose');
 const roomSchema = new Schema({
   name: {
     type: String,
-    required: true,
   },
   avatar: {
     type: String,
