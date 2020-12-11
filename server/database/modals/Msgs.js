@@ -5,15 +5,15 @@ const MsgsSchema = new Schema({
     type: String,
     required: true,
   },
-  receiverID: {
+  roomID: {
+    type: Schema.Types.ObjectId,
+    ref: 'Rooms',
+  },
+  userID: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
   },
-  senderID: {
-    type: Schema.Types.ObjectId,
-    ref: 'Users',
-  },
-  date: {
+  created_at: {
     type: Date,
     default: Date.now(),
   },
