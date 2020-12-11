@@ -1,6 +1,14 @@
 const router = require('express').Router();
 const {
-  signup, activateUser, login, addFriend, respondFriendRequest, getFriends, getUsers, getUserRooms,
+  signup,
+  activateUser,
+  login,
+  addFriend,
+  respondFriendRequest,
+  getFriends,
+  getUsers,
+  getUserRooms,
+  createRoom,
 } = require('./controllers');
 
 const verifyUser = require('./controllers/middleWare/verifyUser');
@@ -23,5 +31,7 @@ router.get('/friends/:status', getFriends);
 router.get('/users/:start', getUsers);
 
 router.get('/rooms', getUserRooms);
+
+router.post('/room', createRoom);
 
 module.exports = router;

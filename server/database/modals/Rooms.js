@@ -15,6 +15,7 @@ const roomSchema = new Schema({
         ref: 'Users',
       },
     ],
+    required: true,
   },
 });
 
