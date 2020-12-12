@@ -13,7 +13,7 @@ const roomSchema = new Schema({
       {
         type: Schema.Types.ObjectId,
         ref: 'Users',
-      },
+      }, { _id: false },
     ],
     required: true,
   },

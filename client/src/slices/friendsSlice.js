@@ -22,7 +22,7 @@ export const getSuggestedFriends = createAsyncThunk(
 export const addFriend = createAsyncThunk(
   'friends/addFriend',
   async (friendID) => {
-    const result = await fetch('/api/v1/addFriend', {
+    const result = await fetch('/api/v1/friend', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

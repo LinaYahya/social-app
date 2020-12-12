@@ -1,66 +1,24 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable prefer-template */
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRooms } from '../../slices/roomsSlice';
 import './style.css';
 
-const chats = [
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  }, {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-  {
-    name: 'hi',
-    avatar:
-      'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/qyrth98fqt0l4pwjfa50.jpg',
-  },
-];
+function Rooms({ setChatID }) {
+  const { rooms } = useSelector((state) => state.rooms);
+  const dispatch = useDispatch();
 
-function Rooms() {
+  useEffect(() => {
+    dispatch(getRooms());
+  }, []);
   return (
     <div className="conversations">
-      {chats?.map((chat, index) => (
-        <div className="room" key={index}>
-          <img src={chat.avatar} alt="" />
-          <span>{chat.name}</span>
+      {rooms?.map(({ _id, name, avatar }) => (
+        <div className="room" role="button" tabIndex={0} key={_id} onClick={() => setChatID(_id)}>
+          <img src={'https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/' + avatar} alt={name} />
+          <span>{name}</span>
         </div>
       ))}
     </div>
@@ -68,7 +26,7 @@ function Rooms() {
 }
 
 Rooms.propTypes = {
-
+  setChatID: PropTypes.func.isRequired,
 };
 
 export default Rooms;
