@@ -1,0 +1,50 @@
+.chatBox {
+  background-image: url("../../assets/imageedit_3_9605650369.png");
+  background-color: #e5ddd58c;
+  height: 80vh;
+  align-items: baseline;
+}
+.chat header {
+  border-left: 1px solid #d8d6d5;
+}
+
+.containerChat {
+  text-align: center;
+  background: floralwhite;
+}
+.containerChat img {
+  margin-top: 20%;
+  margin-left: 35%;
+  display: block;
+  width: 30%;
+  opacity: 0.7;
+}
+
+.msgBox {
+  border-radius: 7.5px;
+  width: fit-content;
+  margin: 0 20px 30px;
+  display: block;
+  padding: 10px 0;
+  font-weight: bolder;
+  align-self: start;
+  background-color: floralwhite;
+}
+.msgYou {
+  background-color: #dcf8c6;
+  float: right;
+}
+.msgBox span {
+  padding: 20px;
+}
+.msgBox time,
+.msgUser {
+  color: #303030;
+  font-size: 10px;
+  align-self: end;
+}
+
+.msgUser {
+  font-size: 15px;
+  color: green;
+}
