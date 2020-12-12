@@ -1,20 +1,28 @@
+.homePage{
+  display: flex;
+  flex-wrap: wrap;
+}
 .roomlist {
   width: 30%;
   height: 100vh;
-  background-color: whitesmoke;
+  background-color: floralwhite;
 }
 
 .roomHeader,
 .friendsBar__nav {
-  height: 12%;
-  border-bottom: 1px solid #d8d6d5;
-  padding: 20px;
+  height: 6vh;  
+  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(221, 221, 221);
+  background-color: #ededed;
 }
+
 .friendsBar__nav {
   background-color: #00bfa5;
   color: white;
+}
+
+.chat {
+   width: 70%;
 }

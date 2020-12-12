@@ -8,7 +8,7 @@ export default function PersonalHeader({ setShowFriends }) {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="roomHeader">
+    <header className="roomHeader">
       <img
         src="https://res.cloudinary.com/dacf3uopo/image/upload/c_scale,h_50,r_500,w_50/v1605737001/npm04fbyn5cdsarivhi9.jpg"
         alt="avatar"
@@ -27,7 +27,7 @@ export default function PersonalHeader({ setShowFriends }) {
         )}
       </div>
 
-    </div>
+    </header>
 
   );
 }
