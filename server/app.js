@@ -1,5 +1,7 @@
 require('dotenv').config();
+const http = require('http');
 const express = require('express');
+const socketIo = require('socket.io');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -9,6 +11,8 @@ const router = require('./router');
 const dbConnection = require('./database/connection');
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 app.disabled('x-powered-by');
 app.set('PORT', process.env.PORT || 5000);
@@ -28,6 +32,13 @@ app.use('/api/v1/', router);
 dbConnection
   .on('open', () => console.log('opened'))
   .on('error', () => console.log('error happened'));
+
+io.on('connection', (socket) => {
+  console.log('client connected');
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
 
 app.use((req, res) => {
   res.status(404).send({ msg: 'page not found' });
