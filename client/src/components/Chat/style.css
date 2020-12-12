@@ -48,3 +48,18 @@
   font-size: 15px;
   color: green;
 }
+.inputMsg_container{
+  height: 9vh;
+  text-align: center;
+  background: #ececec ;
+  align-items: center;
+}
+
+.inputMsg_container input{
+  width: 80%;
+  border-radius: 20px;
+  border: none;
+  margin-top: 1vh;
+  outline: none;
+  padding: 15px;
+}

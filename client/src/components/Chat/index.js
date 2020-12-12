@@ -57,6 +57,9 @@ function Chat({ chatID }) {
 
             </div>
           </div>
+          <div className="inputMsg_container">
+            <input placeholder="Type a message" />
+          </div>
 
         </div>
       ) : (
