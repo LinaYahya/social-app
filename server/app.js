@@ -8,7 +8,7 @@ const compression = require('compression');
 const morgan = require('morgan');
 
 const router = require('./router');
-const dbConnection = require('./database/connection');
+const verifyUser = require('./controllers/middleWare/verifyUser');
 
 const app = express();
 const server = http.createServer(app);
@@ -25,16 +25,17 @@ const middleWares = [
 ];
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
 app.use(middleWares);
 
 app.use('/api/v1/', router);
 
-dbConnection
-  .on('open', () => console.log('opened'))
-  .on('error', () => console.log('error happened'));
+const wrap = (middleware) => (socket, next) => middleware(socket.request, {}, next);
 
-io.on('connection', (socket) => {
-  console.log('client connected');
+io.use(wrap(verifyUser)).on('connection', (socket) => {
+  socket.on('data', (msg) => {
+    console.log('hi from server', msg);
+  });
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
@@ -55,4 +56,4 @@ app.use((err, req, res, next) => {
   res.status(statusCode).send(payload);
 });
 
-module.exports = app;
+module.exports = { server, app };

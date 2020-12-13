@@ -1,5 +1,5 @@
-const app = require('./app');
+const { server, app } = require('./app');
 
-app.listen(app.get('PORT'), () => {
+server.listen(app.get('PORT'), () => {
   console.log('http://localhost:5000');
 });
