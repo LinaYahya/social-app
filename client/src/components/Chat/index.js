@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prefer-template */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import './style.css';
@@ -33,8 +34,19 @@ const MsgBlock = (msg) => {
 };
 
 function Chat({ chatID }) {
+  const [msg, setMsg] = useState('');
+
   const { rooms } = useSelector((state) => state.rooms);
   const room = rooms.find((ele) => ele._id === chatID);
+
+  const socket = io();
+  useEffect(() => {
+    // socket.open();
+    socket.emit('data',msg, () => {
+
+      console.log('hi socket');
+    });
+  }, [msg]);
 
   return (
     <div className="chat">
@@ -58,7 +70,7 @@ function Chat({ chatID }) {
             </div>
           </div>
           <div className="inputMsg_container">
-            <input placeholder="Type a message" />
+            <input placeholder="Type a message" onChange={(e) => setMsg(e.target.value)}/>
           </div>
 
         </div>

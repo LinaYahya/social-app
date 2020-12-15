@@ -1,18 +1,15 @@
 require('dotenv').config();
-const http = require('http');
+
 const express = require('express');
-const socketIo = require('socket.io');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const morgan = require('morgan');
+const connection = require('./database/connection');
 
 const router = require('./router');
-const verifyUser = require('./controllers/middleWare/verifyUser');
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
 
 app.disabled('x-powered-by');
 app.set('PORT', process.env.PORT || 5000);
@@ -30,16 +27,9 @@ app.use(middleWares);
 
 app.use('/api/v1/', router);
 
-const wrap = (middleware) => (socket, next) => middleware(socket.request, {}, next);
-
-io.use(wrap(verifyUser)).on('connection', (socket) => {
-  socket.on('data', (msg) => {
-    console.log('hi from server', msg);
-  });
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-});
+connection
+  .on('open', () => console.log('mongo database is connected'))
+  .on('error', () => process.exit(1));
 
 app.use((req, res) => {
   res.status(404).send({ msg: 'page not found' });
@@ -56,4 +46,4 @@ app.use((err, req, res, next) => {
   res.status(statusCode).send(payload);
 });
 
-module.exports = { server, app };
+module.exports = app;
