@@ -7,46 +7,51 @@ import { useDispatch, useSelector } from 'react-redux';
 import './style.css';
 import whatApp from '../../assets/favicon.ico';
 
-const msgs = [
-  { text: 'hi omar', date: '12:25 pm', user: 'lina' },
-  { text: 'hi lina', date: '12:25 pm', user: 'amar' },
-  { text: 'how are you doing?', date: '12:25 pm', user: 'lina' },
-  { text: 'fine', date: '12:25 pm', user: 'omar' },
-  { text: 'What about you', date: '12:25 pm', user: 'omar' },
-
-];
-const MsgBlock = (msg) => {
-  const { text, date, user } = msg.msg;
-  // const userID = 'lina';
+const MsgBlock = ({ msg }) => {
+  const { msg: msgText, created_at: date, userID: { name } } = msg;
   return (
-    <div className={user === 'lina' ? 'msgBox msgYou' : 'msgBox'}>
-      {user !== 'lina' && (
+    <div className={name === 'lina' ? 'msgBox msgYou' : 'msgBox'}>
+      {name !== 'lina' && (
         <>
-          <span className="msgUser">{user}</span>
+          <span className="msgUser">{name}</span>
           <br />
         </>
       ) }
-      <span>{text}</span>
+      <span>{msgText}</span>
       <br />
-      <time>{date}</time>
+      <time>{new Date(date).toLocaleString()}</time>
     </div>
   );
 };
 
 function Chat({ chatID }) {
+  const [msgInput, setMsgInput] = useState('');
   const [msg, setMsg] = useState('');
+  const [prevMsgs, setPrevMsgs] = useState([]);
 
   const { rooms } = useSelector((state) => state.rooms);
   const room = rooms.find((ele) => ele._id === chatID);
 
-  const socket = io();
+  const socket = io({ autoConnect: false });
   useEffect(() => {
-    // socket.open();
-    socket.emit('data',msg, () => {
-
-      console.log('hi socket');
-    });
+    if (msg) {
+      socket.open();
+      socket.emit('msg', { msg, roomID: chatID });
+    }
   }, [msg]);
+
+  useEffect(() => {
+    socket.on('msg', (data) => {
+      setPrevMsgs((pre) => [data, ...pre]);
+    });
+  });
+  useEffect(() => {
+    socket.open();
+    socket.emit('room', chatID);
+    socket.on('room', (messages) => {
+      setPrevMsgs(messages);
+    });
+  }, [chatID]);
 
   return (
     <div className="chat">
@@ -60,9 +65,9 @@ function Chat({ chatID }) {
           </header>
           <div className="chatBox">
             <div>
-              {msgs?.map((msg) => (
+              {prevMsgs?.reverse().map((Msg) => (
                 <>
-                  <MsgBlock msg={msg} />
+                  <MsgBlock msg={Msg} key={Msg._id} />
                   <br />
                 </>
               ))}
@@ -70,7 +75,16 @@ function Chat({ chatID }) {
             </div>
           </div>
           <div className="inputMsg_container">
-            <input placeholder="Type a message" onChange={(e) => setMsg(e.target.value)}/>
+            <input placeholder="Type a message" value={msgInput} onChange={(e) => setMsgInput(e.target.value)} />
+            <button
+              type="button"
+              onClick={() => {
+                setMsg(msgInput);
+                setMsgInput('');
+              }}
+            >
+              send
+            </button>
           </div>
 
         </div>
@@ -87,6 +101,15 @@ function Chat({ chatID }) {
   );
 }
 
+MsgBlock.propTypes = {
+  msg: PropTypes.shape({
+    created_at: PropTypes.string.isRequired,
+    msg: PropTypes.string.isRequired,
+    userID: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 Chat.propTypes = {
   chatID: PropTypes.string.isRequired,
 };
