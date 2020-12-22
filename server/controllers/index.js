@@ -3,6 +3,7 @@ const {
   addFriend, respondFriendRequest, getFriends, getUsers,
 } = require('./friends');
 const { getUserRooms, createRoom } = require('./rooms');
+const { getMsgs } = require('./msgs');
 
 module.exports = {
   signup,
@@ -14,4 +15,5 @@ module.exports = {
   getUsers,
   getUserRooms,
   createRoom,
+  getMsgs,
 };

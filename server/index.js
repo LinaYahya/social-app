@@ -1,4 +1,4 @@
-const {app, server} = require('./app');
+const { app, server } = require('./app');
 // const server = require('./socket');
 
 server.listen(app.get('PORT'), () => {
