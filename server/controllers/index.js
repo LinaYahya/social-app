@@ -4,6 +4,7 @@ const {
 } = require('./friends');
 const { getUserRooms, createRoom } = require('./rooms');
 const { getMsgs } = require('./msgs');
+const { notFoundErrorHandler, serverErrorHandler } = require('./error');
 
 module.exports = {
   signup,
@@ -16,4 +17,6 @@ module.exports = {
   getUserRooms,
   createRoom,
   getMsgs,
+  notFoundErrorHandler,
+  serverErrorHandler,
 };
