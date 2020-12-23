@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const http = require('http');
+const { join } = require('path');
 const express = require('express');
 const socketIo = require('socket.io');
 const cookieParser = require('cookie-parser');
@@ -27,11 +28,17 @@ const middleWares = [
   cookieParser(),
 ];
 
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
-
 app.use(middleWares);
 
 app.use('/api/v1/', router);
+
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
+  });
+}
 
 connection
   .on('open', () => console.log('mongo database is connected'))
