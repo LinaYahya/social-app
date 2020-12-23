@@ -3,7 +3,8 @@ const { verify } = require('../utils/jwt');
 
 module.exports = async (req, res, next) => {
   try {
-    const { token } = req.cookies;
+    const cookies = req.headers.cookie;
+    const token = cookies.split('token=')[1];
     if (token) {
       const { id } = await verify(token);
       if (id) {

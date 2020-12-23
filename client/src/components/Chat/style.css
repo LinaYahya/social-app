@@ -3,6 +3,7 @@
   background-color: #e5ddd58c;
   height: 80vh;
   align-items: baseline;
+  overflow-y: scroll;
 }
 .chat header {
   border-left: 1px solid #d8d6d5;

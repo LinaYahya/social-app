@@ -9,6 +9,9 @@ const {
   getUsers,
   getUserRooms,
   createRoom,
+  getMsgs,
+  notFoundErrorHandler,
+  serverErrorHandler,
 } = require('./controllers');
 
 const verifyUser = require('./controllers/middleWare/verifyUser');
@@ -33,5 +36,9 @@ router.get('/users/:start', getUsers);
 router.get('/rooms', getUserRooms);
 
 router.post('/room', createRoom);
+
+router.get('/msgs/:chatID/:start', getMsgs);
+
+router.use([notFoundErrorHandler, serverErrorHandler]);
 
 module.exports = router;
